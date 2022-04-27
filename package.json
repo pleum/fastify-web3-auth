@@ -1,0 +1,19 @@
+{
+  "name": "fastify-web3-auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "dependencies": {
+    "@fastify/cors": "7.0.0",
+    "@fastify/helmet": "8.0.0",
+    "dotenv": "^16.0.0",
+    "fastify": "^3.28.0",
+    "web3-token": "^0.2.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
