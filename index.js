@@ -1,35 +1,28 @@
 require("dotenv").config();
 
+// #region Dependencies
 const fastify = require("fastify");
 const cors = require("@fastify/cors");
 const helmet = require("@fastify/helmet");
 const Web3Token = require("web3-token");
+// #endregion
 
-/**
- * Environment variables.
- */
-
+// #region Environment variables
 const SERVER_PORT = process.env.SERVER_PORT || 8080;
+// #endregion
 
-/**
- * Instances
- */
-
+// #region Instances
 const app = fastify({
   logger: true,
 });
+// #endregion
 
-/**
- * Middlewares
- */
-
+// #region Middiewares
 app.register(helmet);
 app.register(cors, { origin: "*" });
+// #endregion
 
-/**
- * Hooks
- */
-
+// #region Hooks
 const userGuardHook = async (request, reply) => {
   try {
     const token = request.headers["authorization"];
@@ -47,11 +40,9 @@ const userGuardHook = async (request, reply) => {
     });
   }
 };
+// #endregion
 
-/**
- * Handlers
- */
-
+// #region Handlers
 app.register(
   (instance, _, done) => {
     instance.addHook("preHandler", userGuardHook);
@@ -68,11 +59,9 @@ app.register(
 app.get("/", async (request, reply) => {
   await reply.send({ hello: "world" });
 });
+// #endregion
 
-/**
- * Application
- */
-
+// #region Application
 const start = async () => {
   try {
     await app.listen(SERVER_PORT);
@@ -82,3 +71,4 @@ const start = async () => {
   }
 };
 start();
+// #endregion
